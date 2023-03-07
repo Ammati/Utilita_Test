@@ -1,14 +1,9 @@
-﻿using OpenQA.Selenium.Chrome;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
-using NUnit.Framework;
 
 namespace FindingCustomerReferenceNo.StepDefinitions
 {
@@ -40,7 +35,6 @@ namespace FindingCustomerReferenceNo.StepDefinitions
             {
                 ChromeOptions options = new ChromeOptions();
                 options.AddArguments("start-maximized");
-                //options.AddArguments("--incognito");
                 if (headLess)
                     options.AddArgument("--headless");
 

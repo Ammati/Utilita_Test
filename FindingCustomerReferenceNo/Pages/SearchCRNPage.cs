@@ -1,17 +1,13 @@
-﻿using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace FindingCustomerReferenceNo.Pages
 {
-    public class FindCustomerReferenceNoPage
+    public class SearchCRNPage : BasePage
     {
-        public IWebDriver Driver { get; }
-        public IWait<IWebDriver> Wait { get; }
+        public SearchCRNPage(IWebDriver driver, IWait<IWebDriver> wait) : base(driver, wait)
+        {
+        }
 
         private IWebElement FindButtonElement => Driver.FindElement(By.XPath("//div[@class='cell large-3 small-12 align-self-top crn-fin-btn-cell']/a"));
 
@@ -20,14 +16,6 @@ namespace FindingCustomerReferenceNo.Pages
         private IWebElement EmailTextPlaceholderElement => Driver.FindElement(By.XPath("//input[@id='email-input']"));
 
         private IWebElement PostcodeTextPlaceholderElement => Driver.FindElement(By.XPath("//input[@class='form-control postcode-input']"));
-
-
-
-        public FindCustomerReferenceNoPage(IWebDriver driver, IWait<IWebDriver> wait)
-        {
-            Driver = driver;
-            Wait = wait;
-        }
 
         public void WaitForPageLoad()
         {
@@ -53,8 +41,6 @@ namespace FindingCustomerReferenceNo.Pages
         {
             PostcodeTextPlaceholderElement.SendKeys(postcode);
         }
-
     }
-
 }
 

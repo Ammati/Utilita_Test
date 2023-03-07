@@ -8,21 +8,17 @@ using System.Threading.Tasks;
 
 namespace FindingCustomerReferenceNo.Pages
 {
-    public class HomePage
-    {
-        public IWebDriver Driver { get; }
-        public IWait<IWebDriver> Wait { get; }
-        private IWebElement AcceptAllCookiesElement => Driver.FindElement(By.Id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"));
 
-        //private IWebElement HelpElement => Driver.FindElement(By.XPath("//*div/ul[@class='top-bar-menu active']/div/div/li[4]/a"));
+
+    public class HomePage : BasePage
+    {
+        private IWebElement AcceptAllCookiesElement => Driver.FindElement(By.Id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"));
         private IWebElement GetAQuoteElement => Driver.FindElement(By.LinkText("Get a quote"));
         private IWebElement HelpElement => Driver.FindElement(By.LinkText("Help"));
 
 
-        public HomePage(IWebDriver driver, IWait<IWebDriver> wait)
+        public HomePage(IWebDriver driver, IWait<IWebDriver> wait):base(driver,wait)
         {
-            Driver = driver;
-            Wait = wait;
         }
 
         /* public void WaitForPageLoad()

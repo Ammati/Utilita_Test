@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
-using FluentAssertions;
-using System.Data;
-using TechTalk.SpecFlow.Assist;
-using FindingCustomerReferenceNo.Model;
+﻿using FindingCustomerReferenceNo.Model;
 using FindingCustomerReferenceNo.Pages;
+using FluentAssertions;
+using NUnit.Framework;
+using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace FindingCustomerReferenceNo.StepDefinitions
 {
     [Binding]
-    public class FindCustomerReferenceNosteps
+    public class Steps
     {
         public HomePage HomePage;
         public HelpPage HelpPage;
-        public FindCustomerReferenceNoPage FindCustomerReferenceNoPage;
+
+        public SearchCRNPage FindCustomerReferenceNoPage;
         public Context Context { get; }
-         public FindCustomerReferenceNosteps(Context context)
+        public Steps(Context context)
         {
             Context = context;
         }
+
         [Given(@"user open the utilita home page")]
         public void GivenUserOpenTheUtilitaHomePage()
         {
-            Context.Driver.Url = "https://utilita.co.uk//";
+            Context.Driver.Url = TestContext.Parameters["Url"] ;
             HomePage = new HomePage(Context.Driver, Context.WebDriverWait);
             HomePage.AcceptCookies();
-           // HomePage.WaitForPageLoad();
         }
 
         [When(@"user click  on Help")]
@@ -51,13 +47,13 @@ namespace FindingCustomerReferenceNo.StepDefinitions
             HelpPage.ClickOnCustomerReferenceElement();
 
         }
+
         [Then(@"YourCustomerReferenceNumber page is dispalyed")]
         public void ThenYourCustomerReferenceNumberPageIsDispalyed()
         {
-            FindCustomerReferenceNoPage = new FindCustomerReferenceNoPage(Context.Driver, Context.WebDriverWait);
+            FindCustomerReferenceNoPage = new SearchCRNPage(Context.Driver, Context.WebDriverWait);
             FindCustomerReferenceNoPage.WaitForPageLoad();
         }
-       
 
         [When(@"user clicks on Find button")]
         public void WhenUserClicksOnFindButton()
@@ -65,14 +61,12 @@ namespace FindingCustomerReferenceNo.StepDefinitions
             FindCustomerReferenceNoPage.ClickOnFindElement();
         }
 
-
         [Then(@"error message '([^']*)' is displayed")]
         public void ThenErrorMessageIsDisplayed(string expectedErrorMessage)
         {
             var actulErrorMessage = FindCustomerReferenceNoPage.GetErrorMessage();
             actulErrorMessage.Should().Be(expectedErrorMessage);
         }
-
 
         [Then(@"user enter the email as follows")]
         public void ThenUserEnterTheEmailAsFollows(Table table)
@@ -86,9 +80,8 @@ namespace FindingCustomerReferenceNo.StepDefinitions
         {
             var email = table.CreateInstance<CustomerReferenceDataTable>().Email;
             FindCustomerReferenceNoPage.EnterEmailAddress(email);
-            var postcode=table.CreateInstance<CustomerReferenceDataTable>().Postcode;
+            var postcode = table.CreateInstance<CustomerReferenceDataTable>().Postcode;
             FindCustomerReferenceNoPage.EnterPostcode(postcode);
         }
-
     }
 }
