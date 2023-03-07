@@ -4,15 +4,16 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
+using Utilita.UITests.Context;
 
 namespace FindingCustomerReferenceNo.StepDefinitions
 {
     [Binding]
     public class Hook
     {
-        public Context Context { get; }
+        public WebDriverContext Context { get; }
 
-        public Hook(Context context)
+        public Hook(WebDriverContext context)
         {
             Context = context;
         }

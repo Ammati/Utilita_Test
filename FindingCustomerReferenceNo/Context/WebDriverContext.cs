@@ -1,9 +1,9 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace FindingCustomerReferenceNo
+namespace Utilita.UITests.Context
 {
-    public class Context
+    public class WebDriverContext
     {
         public WebDriver Driver { get; set; }
         public IWait<IWebDriver> WebDriverWait { get; set; }

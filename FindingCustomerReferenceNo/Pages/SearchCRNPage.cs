@@ -9,13 +9,11 @@ namespace FindingCustomerReferenceNo.Pages
         {
         }
 
-        private IWebElement FindButtonElement => Driver.FindElement(By.XPath("//div[@class='cell large-3 small-12 align-self-top crn-fin-btn-cell']/a"));
+        private IWebElement FindButtonElement => Driver.FindElement(By.XPath("//a[text()='Find']"));
 
-        private IWebElement EmailRadioButton => Driver.FindElement(By.XPath("//input[@id='id-email']"));
+        private IWebElement EmailElement => Driver.FindElement(By.XPath("//input[@id='email-input']"));
 
-        private IWebElement EmailTextPlaceholderElement => Driver.FindElement(By.XPath("//input[@id='email-input']"));
-
-        private IWebElement PostcodeTextPlaceholderElement => Driver.FindElement(By.XPath("//input[@class='form-control postcode-input']"));
+        private IWebElement PostCodeElement => Driver.FindElement(By.XPath("//input[@name='p_postcode']"));
 
         public void WaitForPageLoad()
         {
@@ -35,11 +33,11 @@ namespace FindingCustomerReferenceNo.Pages
 
         public void EnterEmailAddress(string email)
         {
-            EmailTextPlaceholderElement.SendKeys(email);
+            EmailElement.SendKeys(email);
         }
         public void EnterPostcode(string postcode)
         {
-            PostcodeTextPlaceholderElement.SendKeys(postcode);
+            PostCodeElement.SendKeys(postcode);
         }
     }
 }
